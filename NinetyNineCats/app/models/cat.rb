@@ -13,18 +13,22 @@
 #
 
 class Cat < ApplicationRecord
+  COLORS = %w(red orange blue white black green)
+  SEX = %w(m f M F)
+
   validates_presence_of :birth_date, :color, :name, :sex, :description
-  validates :sex, length: {maximum: 1}
-  validate :check_gender
+  validates :color, inclusion: { in: COLORS, message: "Not a valid color" }
+  validates :sex, inclusion: { in: SEX, message: "Not a valid gender"}
+  # validate :check_gender
 
   def age
     ((DateTime.now - birth_date) / 365.25).floor
   end
 
-private
-  def check_gender
-    p sex
-    errors[:sex] << "Gender not valid" unless ["M", "F"].include?(sex.upcase)
-  end
+# private
+#   def check_gender
+#     p sex
+#     errors[:sex] << "Gender not valid" unless ["M", "F"].include?(sex.upcase)
+#   end
 
 end
