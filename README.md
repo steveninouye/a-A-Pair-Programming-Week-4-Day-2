@@ -4,6 +4,5 @@
 - 99 Cats
 
 ## Completed By
-
 - Steven Inouye
 - Peter Yao
