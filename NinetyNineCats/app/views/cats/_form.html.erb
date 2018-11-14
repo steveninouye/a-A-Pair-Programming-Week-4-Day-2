@@ -1,8 +1,18 @@
-<form action="<%= new_cat_url %>" method="post">
-  <input type="hidden" name="_method" value="patch">
+<% if action == :new
+action_url = cats_url
+submit_text = "Create new cat"
+else
+action_url = cat_url(cat)
+submit_text = "Update new cat"
+end%>
+
+<form action="<%= action_url %>" method="post">
+  <% if action == :edit%>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
   <label>
     Name:
-  <input type="text" name="cat[name]" value="<%= @cat.name %>">
+  <input type="text" name="cat[name]" value="<%= cat.name %>">
   </label>
 
  <br>
@@ -10,10 +20,11 @@
   <label>
     Sex:
   Male: <input type="radio" name="cat[sex]" value="M"
-  <%= "selected" if @cat.sex.upcase == "M"%>>
+  <%= "checked" if cat.sex == "M"%>
+  >
   <br>
   Female: <input type="radio" name="cat[sex]" value="F"
-  <%= "selected" if @cat.sex.upcase == "F"%>>
+  <%= "checked" if cat.sex == "F"%>>
   </label>
 
 <br>
@@ -23,7 +34,9 @@
   <select name="cat[color]">
     <option disabled selected>Pick a Color</option>
     <% Cat::COLORS.each do |color| %>
-    <option value = "<%= color %>"> <%= color %> </option>
+    <option value = "<%= color %>"
+      <%= "selected" if color == cat.color %>
+      > <%= color %> </option>
     <% end %>
   </select>
 </label>
@@ -35,7 +48,11 @@
 
 <label>
   Description:
-  <textarea placeholder="Enter a description"></textarea>
+  <textarea placeholder="Enter a description"><%= cat.description %></textarea>
+</label>
+
+<label>
+  <input type="submit" value= '<%= submit_text %>'>
 </label>
 
 </form>

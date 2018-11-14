@@ -1,4 +1,5 @@
-<form action="<%= new_cat_url %>" method="post">
+<!--
+<form action="<%#= new_cat_url %>" method="post">
 
   <label>
     Name:
@@ -20,9 +21,9 @@
   Color:
   <select name="cat[color]">
     <option disabled selected>Pick a Color</option>
-    <% Cat::COLORS.each do |color| %>
-    <option value = "<%= color %>"> <%= color %> </option>
-    <% end %>
+    <%# Cat::COLORS.each do |color| %>
+    <option value = "<%#= color %>"> <%#= color %> </option>
+    <%# end %>
   </select>
 </label>
 
@@ -37,3 +38,5 @@
 </label>
 
 </form>
+-->
+<%= render 'form', cat: @cat, action: :new %>
