@@ -12,6 +12,17 @@
 #
 
 class CatRentalRequest < ApplicationRecord
+  STATUS = %w(PENDING APPROVED DENIED)
 
-  
+  validates_presence_of :cat_id, :start_date, :end_date, :status
+  validates :status, inclusion: { in: STATUS, message: "Not a valid status"}
+
+  belongs_to :cat,
+    foreign_key: :cat_id,
+    class_name: :Cat,
+    dependent: :destroy
+
+  def overlapping_requests
+    Cat.include(:cat_rental_requests).where()
+  end
 end

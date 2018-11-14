@@ -21,6 +21,11 @@ class Cat < ApplicationRecord
   validates :sex, inclusion: { in: SEX, message: "Not a valid gender"}
   # validate :check_gender
 
+  has_many :cat_rental_requests,
+    foreign_key: :cat_id,
+    class_name: :CatRentalRequest,
+    dependent: :destroy
+
   def age
     ((DateTime.now - birth_date) / 365.25).floor
   end
