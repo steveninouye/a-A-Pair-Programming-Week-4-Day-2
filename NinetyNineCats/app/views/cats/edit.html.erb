@@ -10,10 +10,11 @@
   <label>
     Sex:
   Male: <input type="radio" name="cat[sex]" value="M"
-  <%= "selected" if @cat.sex.upcase == "M"%>>
+  <%= "checked" if @cat.sex.upcase == "M"%>
+  >
   <br>
   Female: <input type="radio" name="cat[sex]" value="F"
-  <%= "selected" if @cat.sex.upcase == "F"%>>
+  <%= "checked" if @cat.sex.upcase == "F"%>>
   </label>
 
 <br>
@@ -23,7 +24,9 @@
   <select name="cat[color]">
     <option disabled selected>Pick a Color</option>
     <% Cat::COLORS.each do |color| %>
-    <option value = "<%= color %>"> <%= color %> </option>
+    <option value = "<%= color %>"
+      <%= "selected" if color == @cat.color %>
+      > <%= color %> </option>
     <% end %>
   </select>
 </label>
@@ -35,7 +38,7 @@
 
 <label>
   Description:
-  <textarea placeholder="Enter a description"></textarea>
+  <textarea placeholder="Enter a description"><%= @cat.description %></textarea>
 </label>
 
 </form>

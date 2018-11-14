@@ -1,0 +1,41 @@
+<form action="<%= new_cat_url %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label>
+    Name:
+  <input type="text" name="cat[name]" value="<%= @cat.name %>">
+  </label>
+
+ <br>
+
+  <label>
+    Sex:
+  Male: <input type="radio" name="cat[sex]" value="M"
+  <%= "selected" if @cat.sex.upcase == "M"%>>
+  <br>
+  Female: <input type="radio" name="cat[sex]" value="F"
+  <%= "selected" if @cat.sex.upcase == "F"%>>
+  </label>
+
+<br>
+
+<label>
+  Color:
+  <select name="cat[color]">
+    <option disabled selected>Pick a Color</option>
+    <% Cat::COLORS.each do |color| %>
+    <option value = "<%= color %>"> <%= color %> </option>
+    <% end %>
+  </select>
+</label>
+
+<label>
+  Birth Date:
+  <input type="date" name="cat[date]" max="2018-12-31" min="2000-1-1" value="2018-11-13">
+</label>
+
+<label>
+  Description:
+  <textarea placeholder="Enter a description"></textarea>
+</label>
+
+</form>
